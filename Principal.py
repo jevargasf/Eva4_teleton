@@ -4,16 +4,14 @@ import os
 
 #--------------------------------------------------------------------------------------------------
 
-def validar_int(ini, fin, txt, err):
+def validar_int(ini, fin, txt):
     while True:
         try:
             op = int(input(txt))
             if ini <= op <= fin:
                 return op
             else:
-                print(err)
-                system("pause")
-                system("cls")
+                raise ValueError
         except ValueError:
             print(f"Error de tipo: Por favor, ingrese un entero entre {ini} y {fin}.")
             system("pause")
@@ -23,6 +21,48 @@ def validar_int(ini, fin, txt, err):
             system("pause")
             system("cls")
 
+def validar_str(txt, err):
+    while True:
+        try:
+            string = input(txt)
+            if len(string) == 0:
+                print(f"Error: {err}. Si quiere omitir el ingreso de este dato, digite 0 (cero).")
+            elif string == '0':
+                return 'N/A'
+            else:
+                return string
+        except Exception as e:
+            print(f"Error no controlado: {e}")
+
+def validar_correo(txt):
+    while True:
+        try:
+            string = input(txt)
+            if len(string) == 0:
+                print(f"Error: El correo no puede quedar vacío. Si quiere omitir el ingreso de este dato, digite 0 (cero).")
+            elif '@' not in string:
+                print(f"Error: Por favor, ingrese una dirección de correo válida.")
+            elif string == '0':
+                return 'N/A'
+            else:
+                return string
+        except Exception as e:
+            print(f"Error no controlado: {e}")
+
+def validar_telefono(txt):
+    while True:
+        try:
+            string = input(txt)
+            if len(string) == 0:
+                print(f"Error: El teléfono no puede quedar vacío. Si quiere omitir el ingreso de este dato, digite 0 (cero).")
+            elif len(string.strip()) is not 9:
+                print(f"Error: Por favor, ingrese un número de teléfono válido. El número telefónico debe tener 9 dígitos.")
+            elif string == '0':
+                return 'N/A'
+            else:
+                return string
+        except Exception as e:
+            print(f"Error no controlado: {e}")
 #--------------------------------------------------------------------------------------------------
 
 d = DAO()
@@ -33,92 +73,114 @@ def menu():
     system("cls")
     txt = """ 
 --------------------------------
-=== Gestión de Centros Teletón ===
+=== Gestión de Institutos Teletón ===
 --------------------------------
-1.Registrar centro Teletón
-2.Listar centros Teletón
-3.Buscar centro Teletón
-4.Modificar datos centro Teletón
-5.Eliminar centro Teletón
+1.Registrar nuevo
+2.Listar institutos
+3.Buscar datos instituto
+4.Modificar datos instituto
+5.Eliminar instituto
 6.Salir\n
 Por favor, digite una opción: 
 """
 
-    op = validar_int(1, 6, txt, "Fuera de rango: Por favor, ingrese una opción válida.\n")
+    op = validar_int(1, 6, txt)
 
     if op==1:
-        registrar_centro()
+        registrar_instituto()
     elif op == 2:
-        listar_centros()
+        listar_institutos()
     elif op == 3:
-        buscar_centro()
+        buscar_instituto()
     elif op == 4:
-        actualizar_centro()
+        actualizar_instituto()
     elif op == 5:
-        eliminar_centros()
+        eliminar_instituto()
     else:
         salir()
 #--------------------------------------------------------------------------------------------------
 
-def registrar_centro():
+def registrar_instituto():
     system("cls")
     print("=== Registrar ===")
-    id = int(input("Digite el _id del centro: "))
+    txt = """
+Digite el _id del nuevo registro: 
+"""
+    id = validar_int(1, 999999, txt)
     
     r = d.comprobar_id(id)
     if r == 1:
         system("cls")
-        print(f"\n --- El id {id} ya existe ---\n")
+        print(f"\n --- El id {id} ya existe. Por favor, intente nuevamente. ---\n")
         system("pause")
         menu()
     
     system("cls")
-    print("--- (Registrar) ---")
-    nom = input("Digite el nombre de la biblioteca: ")
+    print("=== Registrar ===")
+    nom_txt = """
+Digite el nombre del instituto: 
+"""
+    nom = validar_str(nom_txt, "El nombre del instituto no puede quedar vacío")
+
     system("cls")
-    print("--- (Registrar) ---")
-    ciu = input("Digite la ciudad de la biblioteca: ")
+    print("=== Registrar ===")
+    zon_txt = """
+Digite la zona donde se ubica el instituto:
+1. Norte
+2. Centro
+3. Sur
+"""
+    zon = validar_int(1, 3, zon_txt)
+
     system("cls")
-    print("--- (Registrar) ---")
-    pai = input("Digite el país de la biblioteca: ")
+    print("=== Registrar ===")
+    ciu_txt = """
+Digite la ciudad donde se ubica el instituto: 
+"""
+    ciu = validar_str(ciu_txt, "La ciudad no puede quedar vacía")
+
     system("cls")
-    print("--- (Registrar) ---")
-    sal = input("¿Dispone de salas de lectura? 1.Sí 2.No: ")
+    print("=== Registrar ===")
+    dir_txt = """
+Digite la dirección donde se ubica el instituto: 
+"""
+    dir = validar_str(dir_txt, "La dirección no puede quedar vacía")
+
     system("cls")
-    print("--- (Registrar) ---")
-    wif = input("¿Dispone de conectividad Wifi? 1.Sí 2.No: ")
+    print("=== Registrar ===")
+    cor_txt = """
+Ingrese correo de contacto del instituto: 
+"""
+    cor = validar_correo(cor_txt)
+
+    system("cls")
+    print("=== Registrar ===")
+    tel_txt = """
+Ingrese teléfono de contacto del instituto. No ingrese código de país. Ej: 94393492: 
+"""
+    tel = validar_telefono(tel_txt)
     
-    if sal == 1:
-        sal = True
-    elif sal == 2:
-        sal = False
-        
-    if wif == 1:
-        wif = True
-    elif wif == 2:
-        wif = False
-        
     datos = {
         "_id": id,
         "nombre": nom,
-        "ciudad": ciu,
         "ubicacion": {
+            "zona": zon,
             "ciudad": ciu,
-            "pais": pai   
+            "dirección": dir   
         },
-        "servicios": {
-            "lectura_sala": sal,
-            "wifi": wif
+        "contacto": {
+            "correo": cor,
+            "teléfono": tel
         }
     }
-    
-    nuevo = d.registrar(datos)
-    print(f"Biblioteca registrada correctamente ({nuevo}).\n\n")
-    system("cls")
+    print(datos)
+    #nuevo = d.registrar(datos)
+    print(f"Instituto registrado correctamente [recuperar respuesta].\n\n")
+    system("pause")
     menu()
 #--------------------------------------------------------------------------------------------------
 
-def listar_centros():
+def listar_institutos():
     system("cls")
     can = d.cantidad_bibliotecas()
     if can == 0:
@@ -146,7 +208,7 @@ def listar_centros():
 
 #--------------------------------------------------------------------------------------------------
 
-def buscar_centro():
+def buscar_instituto():
     system("cls")
     id = int(input("Digite el _id de la biblioteca a buscar: "))
     r = d.comprobar_id(id)
@@ -176,7 +238,7 @@ def buscar_centro():
 
 #--------------------------------------------------------------------------------------------------
 
-def actualizar_centro():
+def actualizar_instituto():
     system("cls")
     id = int(input("Digite el _id de la biblioteca a buscar: "))
     r = d.comprobar_id(id)
@@ -205,7 +267,7 @@ def actualizar_centro():
 
 #--------------------------------------------------------------------------------------------------
 
-def eliminar_centros():
+def eliminar_instituto():
     pass
 
 #--------------------------------------------------------------------------------------------------
