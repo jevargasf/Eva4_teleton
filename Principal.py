@@ -4,41 +4,66 @@ import os
 
 #--------------------------------------------------------------------------------------------------
 
+def validar_int(ini, fin, txt, err):
+    while True:
+        try:
+            op = int(input(txt))
+            if ini <= op <= fin:
+                return op
+            else:
+                print(err)
+                system("pause")
+                system("cls")
+        except ValueError:
+            print(f"Error de tipo: Por favor, ingrese un entero entre {ini} y {fin}.")
+            system("pause")
+            system("cls")
+        except Exception as e:
+            print(f"Ocurrió un error inesperado: {e}")
+            system("pause")
+            system("cls")
+
+#--------------------------------------------------------------------------------------------------
+
 d = DAO()
 
 #--------------------------------------------------------------------------------------------------
 
 def menu():
     system("cls")
-    print("--------------------------------")
-    print("--- (Gestión De Bibliotecas) ---")
-    print("--------------------------------")
-    print("      * 1.Registrar")
-    print("      * 2.Listar")
-    print("      * 3.Buscar")
-    print("      * 4.Modificar")
-    print("      * 5.Eliminar")
-    print("      * 6.Salir")
-    op = int(input("      * Digite Una Opcion:"))
+    txt = """ 
+--------------------------------
+=== Gestión de Centros Teletón ===
+--------------------------------
+1.Registrar centro Teletón
+2.Listar centros Teletón
+3.Buscar centro Teletón
+4.Modificar datos centro Teletón
+5.Eliminar centro Teletón
+6.Salir\n
+Por favor, digite una opción: 
+"""
+
+    op = validar_int(1, 6, txt, "Fuera de rango: Por favor, ingrese una opción válida.\n")
+
     if op==1:
-        digitar_datos()
+        registrar_centro()
     elif op == 2:
-        listar_bibliotecas()
+        listar_centros()
     elif op == 3:
-        buscar_bibliotecas()
+        buscar_centro()
     elif op == 4:
-        actualizar_datos()
+        actualizar_centro()
     elif op == 5:
-        eliminar_bibliotecas()
+        eliminar_centros()
     else:
         salir()
-
 #--------------------------------------------------------------------------------------------------
 
-def digitar_datos():
+def registrar_centro():
     system("cls")
-    print("--- (Registrar) ---")
-    id = int(input("Digite el _id de la biblioteca: "))
+    print("=== Registrar ===")
+    id = int(input("Digite el _id del centro: "))
     
     r = d.comprobar_id(id)
     if r == 1:
@@ -93,7 +118,7 @@ def digitar_datos():
     menu()
 #--------------------------------------------------------------------------------------------------
 
-def listar_bibliotecas():
+def listar_centros():
     system("cls")
     can = d.cantidad_bibliotecas()
     if can == 0:
@@ -121,7 +146,7 @@ def listar_bibliotecas():
 
 #--------------------------------------------------------------------------------------------------
 
-def buscar_bibliotecas():
+def buscar_centro():
     system("cls")
     id = int(input("Digite el _id de la biblioteca a buscar: "))
     r = d.comprobar_id(id)
@@ -151,7 +176,7 @@ def buscar_bibliotecas():
 
 #--------------------------------------------------------------------------------------------------
 
-def actualizar_datos():
+def actualizar_centro():
     system("cls")
     id = int(input("Digite el _id de la biblioteca a buscar: "))
     r = d.comprobar_id(id)
@@ -180,14 +205,14 @@ def actualizar_datos():
 
 #--------------------------------------------------------------------------------------------------
 
-def eliminar_bibliotecas():
+def eliminar_centros():
     pass
 
 #--------------------------------------------------------------------------------------------------
 
 def salir():
     system("cls")
-    print("--- ¡ Ok. Usted Saldrá de la Aplicación ! ... ¡ Adios ! ---", end="\n\n")
+    print("--- Saliendo del programa... ¡Muchas gracias por su preferencia! ---", end="\n\n")
     system("pause")
     os._exit(1)
 
