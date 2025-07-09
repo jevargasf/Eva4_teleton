@@ -46,7 +46,7 @@ class DAO:
     
 #--------------------------------------------------------------------------------------------------
     
-    def actualizar(self, id, datos_nuevos):
+    def actualizar_instituto(self, id, datos_nuevos):
         resultado = self.collection.update_one(
             { "_id" : id },
             { "$set" : datos_nuevos }
@@ -55,7 +55,7 @@ class DAO:
     
 #--------------------------------------------------------------------------------------------------
     
-    def eliminar(self, id):
+    def eliminar_instituto(self, id):
         resultado = self.collection.delete_one( { "_id":id } )
         return resultado.deleted_count
     

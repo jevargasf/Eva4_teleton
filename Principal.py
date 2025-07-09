@@ -271,6 +271,12 @@ Digite el _id del instituto a actualizar:
             print(f"Dirección: {x['descripcion']['ubicacion']['detalle']['direccion']}")
         
             system("cls")
+
+        # CICLO WHILE QUE OFREZCA UN MENÚ PARA ACUTALIZAR.
+        # SE MANTIENE EN EL CICLO OFRECIENCO ACTUALIZAR HASTA QUE DICE QUE NO
+        # IF ELIF PARA ELEGIR 1 OPCIÓN DEL MENÚ
+        # CUANDO SALE DEL CICLO, SE ENVÍAN LOS DATOS AL DAO
+    
             print("=== Actualizar ===")
             nom_txt = """
         Digite el nuevo nombre del instituto: 
@@ -341,7 +347,7 @@ Digite el _id del instituto a actualizar:
                 }
             }
 
-        res = d.actualizar(id, datos_nuevos)
+        res = d.actualizar_instituto(id, datos_nuevos)
         print(f"Datos actualizados correctamente. Id actualizada: {res}.", end="\n\n")
         system("pause")
         menu()
@@ -349,7 +355,24 @@ Digite el _id del instituto a actualizar:
 #--------------------------------------------------------------------------------------------------
 
 def eliminar_instituto():
-    pass
+    system("cls")
+    id_txt = """
+Digite el _id del instituto a eliminar: 
+"""
+    id = validar_int(1, 999999, id_txt)
+    r = d.comprobar_id(id)
+    if r == 0:
+       system("cls")
+       print(f"El _id del instituto {id} no existe. Imposible eliminar. Por favor, intente nuevamente.\n\n")
+       system("pause")
+       menu()
+    else:
+        system("cls")
+        res = d.eliminar_instituto(id)
+        print(f"Registro eliminado correctamente. Id eliminado: {res}.", end="\n\n")
+        system("pause")
+        menu()
+
 
 #--------------------------------------------------------------------------------------------------
 
