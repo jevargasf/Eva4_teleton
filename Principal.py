@@ -103,10 +103,10 @@ Por favor, digite una opción:
 def registrar_instituto():
     system("cls")
     print("=== Registrar ===")
-    txt = """
+    id_txt = """
 Digite el _id del nuevo registro: 
 """
-    id = validar_int(1, 999999, txt)
+    id = validar_int(1, 999999, id_txt)
     
     r = d.comprobar_id(id)
     if r == 1:
@@ -131,6 +131,12 @@ Digite la zona donde se ubica el instituto:
 3. Sur
 """
     zon = validar_int(1, 3, zon_txt)
+    if zon == 1:
+        zon = 'Norte'
+    elif zon == 2:
+        zon = 'Centro'
+    elif zon == 3:
+        zon = 'Sur'
 
     system("cls")
     print("=== Registrar ===")
@@ -162,108 +168,183 @@ Ingrese teléfono de contacto del instituto. No ingrese código de país. Ej: 94
     
     datos = {
         "_id": id,
-        "nombre": nom,
-        "ubicacion": {
-            "zona": zon,
-            "ciudad": ciu,
-            "dirección": dir   
+        "general": {"nombre": nom},
+        "recursos_humanos": {
+            "contacto": {
+                "correo": cor,
+                "telefono": tel
+            }
         },
-        "contacto": {
-            "correo": cor,
-            "teléfono": tel
+        "descripcion":{
+            "ubicacion":{
+                "detalle": {
+                    "zona": zon,
+                    "ciudad": ciu,
+                    "direccion": dir   
+                }
+            }
         }
     }
-    print(datos)
-    #nuevo = d.registrar(datos)
-    print(f"Instituto registrado correctamente [recuperar respuesta].\n\n")
+    nuevo = d.registrar(datos)
+    print(f"Instituto registrado correctamente: {nuevo}.\n\n")
     system("pause")
     menu()
 #--------------------------------------------------------------------------------------------------
 
 def listar_institutos():
     system("cls")
-    can = d.cantidad_bibliotecas()
+    can = d.cantidad_institutos()
     if can == 0:
         system("cls")
         print("--- No hay datos para listar\n\n")
         system("pause")
         menu()
     else:
-        bib = d.obtener_todos()
+        institutos = d.obtener_todos()
         system("cls")
-        print("=== LISTADO BIBLIOTECAS ===")
-        for x in bib:
+        print("=== LISTADO INSTITUTOS ===")
+        for x in institutos:
             print(f"ID: {x['_id']}")
-            print(f"Nombre: {x['nombre']}")
-            print(f"Ciudad: {x['ubicacion']['ciudad']}")
-            print(f"País: {x['ubicacion']['pais']}")
-            if x['servicios']['lectura_sala'] == True:
-                print("Sala: Sí")
-            else:
-                print("Sala: No")
-            if x['servicios']['wifi'] == True:
-                print("Wifi: Sí")
-            else:
-                print("Wifi: No")
+            print(f"Nombre: {x['general']['nombre']}")
+            print(f"Correo: {x['recursos_humanos']['contacto']['correo']}")
+            print(f"Teléfono: +569 {x['recursos_humanos']['contacto']['telefono']}")
+            print(f"Zona: {x['descripcion']['ubicacion']['detalle']['zona']}")
+            print(f"Ciudad: {x['descripcion']['ubicacion']['detalle']['ciudad']}")
+            print(f"Dirección: {x['descripcion']['ubicacion']['detalle']['direccion']}")
+        system("pause")
+        menu()
 
 #--------------------------------------------------------------------------------------------------
 
 def buscar_instituto():
     system("cls")
-    id = int(input("Digite el _id de la biblioteca a buscar: "))
+    id_txt = """
+Digite el _id del instituto a buscar: 
+"""
+    id = validar_int(1, 999999, id_txt)
     r = d.comprobar_id(id)
     if r == 0:
        system("cls")
-       print(f"La biblioteca {id} no existe\n\n")
+       print(f"El _id del instituto {id} no existe.\n\n")
        system("pause")
        menu()
     else:
-        bib = d.obtener_buscados(id)
+        institutos = d.obtener_buscados(id)
         system("cls")
-        print("=== LISTADO BIBLIOTECAS ===")
-        for x in bib:
+        print("=== LISTADO INSTITUTOS ===")
+        for x in institutos:
             print(f"ID: {x['_id']}")
-            print(f"Nombre: {x['nombre']}")
-            print(f"Ciudad: {x['ubicacion']['ciudad']}")
-            print(f"País: {x['ubicacion']['pais']}")
-            if x['servicios']['lectura_sala'] == True:
-                print("Sala: Sí")
-            else:
-                print("Sala: No")
-            if x['servicios']['wifi'] == True:
-                print("Wifi: Sí")
-            else:
-                print("Wifi: No")
-
+            print(f"Nombre: {x['general']['nombre']}")
+            print(f"Correo: {x['recursos_humanos']['contacto']['correo']}")
+            print(f"Teléfono: +569 {x['recursos_humanos']['contacto']['telefono']}")
+            print(f"Zona: {x['descripcion']['ubicacion']['detalle']['zona']}")
+            print(f"Ciudad: {x['descripcion']['ubicacion']['detalle']['ciudad']}")
+            print(f"Dirección: {x['descripcion']['ubicacion']['detalle']['direccion']}")
+        system("pause")
+        menu()
 
 #--------------------------------------------------------------------------------------------------
 
 def actualizar_instituto():
     system("cls")
-    id = int(input("Digite el _id de la biblioteca a buscar: "))
+    id_txt = """
+Digite el _id del instituto a actualizar: 
+"""
+    id = validar_int(1, 999999, id_txt)
     r = d.comprobar_id(id)
     if r == 0:
        system("cls")
-       print(f"La biblioteca {id} no existe\n\n")
+       print(f"El _id del instituto {id} no existe.")
        system("pause")
        menu()
     else:
-        bib = d.obtener_buscados(id)
+        institutos = d.obtener_buscados(id)
         system("cls")
-        print("=== LISTADO BIBLIOTECAS ===")
-        for x in bib:
+        print("=== LISTADO INSTITUTOS ===")
+        for x in institutos:
             print(f"ID: {x['_id']}")
-            print(f"Nombre: {x['nombre']}")
-            print(f"Ciudad: {x['ubicacion']['ciudad']}")
-            print(f"País: {x['ubicacion']['pais']}")
-            if x['servicios']['lectura_sala'] == True:
-                print("Sala: Sí")
-            else:
-                print("Sala: No")
-            if x['servicios']['wifi'] == True:
-                print("Wifi: Sí")
-            else:
-                print("Wifi: No") 
+            print(f"Nombre: {x['general']['nombre']}")
+            print(f"Correo: {x['recursos_humanos']['contacto']['correo']}")
+            print(f"Teléfono: +569 {x['recursos_humanos']['contacto']['telefono']}")
+            print(f"Zona: {x['descripcion']['ubicacion']['detalle']['zona']}")
+            print(f"Ciudad: {x['descripcion']['ubicacion']['detalle']['ciudad']}")
+            print(f"Dirección: {x['descripcion']['ubicacion']['detalle']['direccion']}")
+        
+            system("cls")
+            print("=== Actualizar ===")
+            nom_txt = """
+        Digite el nuevo nombre del instituto: 
+        """
+            nom = validar_str(nom_txt, "El nombre del instituto no puede quedar vacío")
+
+            system("cls")
+            print("=== Actualizar ===")
+            zon_txt = """
+        Digite la nueva zona donde se ubica el instituto:
+        1. Norte
+        2. Centro
+        3. Sur
+        """
+            zon = validar_int(1, 3, zon_txt)
+            if zon == 1:
+                zon = 'Norte'
+            elif zon == 2:
+                zon = 'Centro'
+            elif zon == 3:
+                zon = 'Sur'
+
+            system("cls")
+            print("=== Actualizar ===")
+            ciu_txt = """
+        Digite la nueva ciudad donde se ubica el instituto: 
+        """
+            ciu = validar_str(ciu_txt, "La ciudad no puede quedar vacía")
+
+            system("cls")
+            print("=== Actualizar ===")
+            dir_txt = """
+        Digite la nueva dirección donde se ubica el instituto: 
+        """
+            dir = validar_str(dir_txt, "La dirección no puede quedar vacía")
+
+            system("cls")
+            print("=== Actualizar ===")
+            cor_txt = """
+        Ingrese nuevo correo de contacto del instituto: 
+        """
+            cor = validar_correo(cor_txt)
+
+            system("cls")
+            print("=== Actualizar ===")
+            tel_txt = """
+        Ingrese nuevo teléfono de contacto del instituto. No ingrese código de país. Ej: 94393492: 
+        """
+            tel = validar_telefono(tel_txt)
+            
+            datos_nuevos = {
+                "_id": id,
+                "general": {"nombre": nom},
+                "recursos_humanos": {
+                    "contacto": {
+                        "correo": cor,
+                        "telefono": tel
+                    }
+                },
+                "descripcion":{
+                    "ubicacion":{
+                        "detalle": {
+                            "zona": zon,
+                            "ciudad": ciu,
+                            "direccion": dir   
+                        }
+                    }
+                }
+            }
+
+        res = d.actualizar(id, datos_nuevos)
+        print(f"Datos actualizados correctamente. Id actualizada: {res}.", end="\n\n")
+        system("pause")
+        menu()
 
 #--------------------------------------------------------------------------------------------------
 

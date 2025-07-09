@@ -1,0 +1,88 @@
+[
+    {
+    "_id": 1,
+    "general": { "nombre":"Instituto Teletón Atacama" },
+    "recursos_huamnos": { "contacto" : { "correo":"copiapo@teleton.cl", "telefono":"522207000" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Copiapó", "direccion":"La Cruz 760, Población La Pradera" } } }
+    },
+    {
+    "_id": 2,
+    "general": { "nombre":"Instituto Teletón Arica" },
+    "recursos_humanos": { "contacto" : { "correo":"arica@teleton.cl", "telefono":"582224703" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Arica", "direccion":"Diego Portales 2471" } } }
+    },
+    {
+    "_id": 3,
+    "general": { "nombre":"Instituto Teletón Iquique" },
+    "recursos_humanos": { "contacto" : { "correo":"iquique@teleton.cl", "telefono":"+56 57 2 588 888" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Iquique", "direccion":"J.J. Pérez 999" } } }
+    },
+    {
+    "_id": 4,
+    "general": { "nombre":"Instituto Teletón Antofagasta" },
+    "recursos_humanos": { "contacto" : { "correo":"antofagasta@teleton.cl", "telefono":"552683101" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Antofagasta", "direccion":"Francisco Puelma 238, sector La Chimba" } } }
+    },
+    {
+    "_id": 5,
+    "general": { "nombre":"Instituto Teletón Calama" },
+    "recursos_humanos": { "contacto" : { "correo":"calama@teleton.cl", "telefono":"552695401" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Calama", "direccion":"Teniente Merino 3551" } } }
+    },
+    {
+    "_id": 6,
+    "general": { "nombre":"Instituto Teletón Coquimbo" },
+    "recursos_humanos": { "contacto" : { "correo":"coquimbo@teleton.cl", "telefono":"512335700" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Norte", "ciudad":"Coquimbo", "direccion":"Guacolda 1946" } } }
+    },
+    {
+    "_id": 7,
+    "general": { "nombre":"Instituto Teletón Valparaíso" },
+    "recursos_humanos": { "contacto" : { "correo":"valparaiso@teleton.cl", "telefono":"322324400" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Instituto", "ciudad":"Valparaiso", "direccion":"Avenida Francia 259" } } }
+    },
+    {
+    "_id": 8,
+    "general": { "nombre":"Instituto Teletón Santiago" },
+    "recursos_humanos": { "contacto" : { "correo":"santiago@teleton.cl", "telefono":"226772000" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Instituto", "ciudad":"Santiago", "direccion":"Avda. Libertador Bernardo O’Higgins 4620" } } }
+    },
+    {
+    "_id": 9,
+    "general": { "nombre":"Instituto Teletón del Maule" },
+    "recursos_humanos": { "contacto" : { "correo":"talca@teleton.cl", "telefono":"712417631" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Talca", "direccion":"Lircay s/n" } } }
+    },
+    {
+    "_id": 10,
+    "general": { "nombre":"Instituto Teletón Concepción" },
+    "recursos_humanos": { "contacto" : { "correo":"concepcion@teleton.cl", "telefono":"412209300" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Concepcion", "direccion":"Los Acacios 1656, Villa San Pedro" } } }
+    },
+    {
+    "_id": 11,
+    "general": { "nombre":"Instituto Teletón Temuco" },
+    "recursos_humanos": { "contacto" : { "correo":"temuco@teleton.cl", "telefono":"452208500" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Temuco", "direccion":"Aldunate 0390" } } }
+    },
+    {
+    "_id": 12,
+    "general": { "nombre":"Instituto Teletón Valdivia" },
+    "recursos_humanos": { "contacto" : { "correo":"N/A", "telefono":"632280000" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Valdivia", "direccion":"Av. Rene Schneider 2631" } } }
+    },
+    {
+    "_id": 13,
+    "general": { "nombre":"Instituto Teletón Puerto Montt" },
+    "recursos_humanos": { "contacto" : { "correo":"ptomontt@teleton.cl", "telefono":"652223900" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Puerto Montt", "direccion":"Egaña 650" } } }
+    },
+    {
+    "_id": 14,
+    "general": { "nombre":"Instituto Teletón Aysén" },
+    "recursos_humanos": { "contacto" : { "correo":"coyhaique@teleton.cl", "telefono":"672243700" } },
+    "descripcion": { "ubicacion": { "detalle": { "zona":"Sur", "ciudad":"Coyhaique", "direccion":"Calle Ejército 567" } } }
+    }
+
+
+]

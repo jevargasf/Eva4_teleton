@@ -6,8 +6,8 @@ class DAO:
     
     def __init__(self):
         self.client = MongoClient("mongodb://localhost:27017")
-        self.db = self.client["crud2"]
-        self.collection = self.db["bibliotecas"]
+        self.db = self.client["teleton"]
+        self.collection = self.db["institutos"]
     
 #--------------------------------------------------------------------------------------------------
     
@@ -28,7 +28,7 @@ class DAO:
     
 #--------------------------------------------------------------------------------------------------
     
-    def cantidad_bibliotecas(self):
+    def cantidad_institutos(self):
         resultado = self.collection.count_documents({})
         return resultado
     
@@ -40,17 +40,22 @@ class DAO:
     
 #--------------------------------------------------------------------------------------------------
     
-    def cantidad_bibliotecas_condicion(self, condicion):
+    def cantidad_institutos_condicion(self, condicion):
         cant = self.collection.count_documents({ "_id":condicion })
         return cant
     
 #--------------------------------------------------------------------------------------------------
     
     def actualizar(self, id, datos_nuevos):
-        pass
+        resultado = self.collection.update_one(
+            { "_id" : id },
+            { "$set" : datos_nuevos }
+        )
+        return resultado.modified_count
     
 #--------------------------------------------------------------------------------------------------
     
     def eliminar(self, id):
-        pass
+        resultado = self.collection.delete_one( { "_id":id } )
+        return resultado.deleted_count
     
